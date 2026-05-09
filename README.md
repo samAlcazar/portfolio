@@ -1,46 +1,54 @@
-# Astro Starter Kit: Basics
+# Portfolio — Samuel Alcazar
 
-```sh
-pnpm create astro@latest -- --template basics
+Portfolio personal desarrollado con [Astro](https://astro.build) y [Tailwind CSS](https://tailwindcss.com).
+
+## Estructura
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│   ├── favicon.svg
+│   └── profile.webp
+├── src/
+│   ├── components/
+│   │   ├── BlogCard.astro
+│   │   ├── ExperienceCard.astro
+│   │   ├── Footer.astro
+│   │   ├── Hero.astro
+│   │   ├── Navbar.astro
+│   │   ├── ProjectCard.astro
+│   │   ├── SEO.astro
+│   │   └── SkillBadge.astro
+│   ├── content/
+│   │   ├── config.ts
+│   │   └── blog/
+│   │       └── hello-world.md
+│   ├── data/
+│   │   ├── experience.ts
+│   │   ├── projects.ts
+│   │   └── technologies.ts
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── blog/
+│   │   │   ├── [...slug].astro
+│   │   │   └── index.astro
+│   │   ├── contact.astro
+│   │   ├── experience.astro
+│   │   ├── index.astro
+│   │   └── projects.astro
+│   └── styles/
+│       └── global.css
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Comandos
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Comando | Acción |
+|---------|--------|
+| `pnpm dev` | Inicia servidor de desarrollo en `localhost:4321` |
+| `pnpm build` | Construye el sitio en `./dist/` |
+| `pnpm preview` | Vista previa de la build |
+| `pnpm check` | Ejecuta type-checking |

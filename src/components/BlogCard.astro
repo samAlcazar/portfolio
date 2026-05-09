@@ -1,0 +1,42 @@
+---
+import { Calendar, Clock, ArrowRight } from '@lucide/astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+---
+
+<a
+  href={`/blog/${post.id}`}
+  class="block bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors group"
+>
+  <div class="flex items-center gap-4 text-xs text-secondary mb-3">
+    <span class="flex items-center gap-1">
+      <Calendar size={14} />
+      {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </span>
+    <span class="flex items-center gap-1">
+      <Clock size={14} />
+      5 min
+    </span>
+  </div>
+
+  <h3 class="font-semibold text-lg group-hover:text-accent transition-colors">{title}</h3>
+  <p class="text-sm text-secondary mt-2">{description}</p>
+
+  {tags && tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mt-4">
+      {tags.map((tag) => (
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">{tag}</span>
+      ))}
+    </div>
+  )}
+
+  <span class="inline-flex items-center gap-1 text-sm text-accent mt-4 group-hover:gap-2 transition-all">
+    Leer más <ArrowRight size={14} />
+  </span>
+</a>

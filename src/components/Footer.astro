@@ -1,0 +1,41 @@
+---
+import { Mail } from '@lucide/astro';
+import IconGitHub from './IconGitHub.astro';
+import IconLinkedIn from './IconLinkedIn.astro';
+---
+
+<footer class="border-t border-primary/10 py-8 mt-16">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-secondary">
+      &copy; {new Date().getFullYear()} Samuel Alcazar. Todos los derechos reservados.
+    </p>
+
+    <div class="flex items-center gap-4">
+      <a
+        href="https://github.com/saalcazar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-secondary hover:text-primary transition-colors"
+        aria-label="GitHub"
+      >
+        <IconGitHub size={20} />
+      </a>
+      <a
+        href="https://linkedin.com/in/saalcazar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-secondary hover:text-primary transition-colors"
+        aria-label="LinkedIn"
+      >
+        <IconLinkedIn size={20} />
+      </a>
+      <a
+        href="mailto:hola@saalcazar.dev"
+        class="text-secondary hover:text-primary transition-colors"
+        aria-label="Correo electrónico"
+      >
+        <Mail size={20} />
+      </a>
+    </div>
+  </div>
+</footer>

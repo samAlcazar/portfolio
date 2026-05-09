@@ -1,0 +1,74 @@
+---
+import { House, Briefcase, BookOpen, Mail, Menu } from '@lucide/astro';
+
+const pathname = Astro.url.pathname;
+
+interface NavLink {
+  href: string;
+  label: string;
+  icon: typeof House;
+}
+
+const links: NavLink[] = [
+  { href: "/", label: "Inicio", icon: House },
+  { href: "/projects", label: "Proyectos", icon: Briefcase },
+  { href: "/experience", label: "Experiencia", icon: Briefcase },
+  { href: "/blog", label: "Blog", icon: BookOpen },
+  { href: "/contact", label: "Contacto", icon: Mail },
+];
+---
+
+<nav class="sticky top-0 z-50 bg-neutral/80 backdrop-blur border-b border-primary/10">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold tracking-tight">
+      SAALCAZAR
+    </a>
+
+    <ul class="hidden md:flex items-center gap-1">
+      {
+        links.map(({ href, label, icon: Icon }) => (
+          <li>
+            <a
+              href={href}
+              class={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
+                pathname === href
+                  ? "bg-tertiary text-primary"
+                  : "text-secondary hover:text-primary hover:bg-tertiary/50"
+              }`}
+            >
+              <Icon size={16} />
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <details class="md:hidden">
+      <summary class="list-none cursor-pointer p-2">
+        <Menu size={24} />
+      </summary>
+      <div class="absolute top-16 left-0 right-0 bg-neutral border-b border-primary/10 p-4">
+        <ul class="flex flex-col gap-1">
+          {
+            links.map(({ href, label, icon: Icon }) => (
+              <li>
+                <a
+                  href={href}
+                  class={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors ${
+                    pathname === href
+                      ? "bg-tertiary text-primary"
+                      : "text-secondary hover:text-primary hover:bg-tertiary/50"
+                  }`}
+                >
+                  <Icon size={18} />
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </details>
+  </div>
+</nav>

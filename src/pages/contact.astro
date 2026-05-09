@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Mail } from '@lucide/astro';
+import IconGitHub from '../components/IconGitHub.astro';
+import IconLinkedIn from '../components/IconLinkedIn.astro';
+---
+
+<Layout
+  title="Contacto"
+  description="Ponte en contacto conmigo para colaborar en tu próximo proyecto."
+>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold">Contacto</h1>
+    <p class="text-secondary mt-2">¿Tienes un proyecto en mente? Hablemos.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 max-w-2xl">
+      <a
+        href="mailto:hola@saalcazar.dev"
+        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
+      >
+        <div class="p-3 bg-accent/20 rounded-lg">
+          <Mail size={24} class="text-accent" />
+        </div>
+        <div>
+          <h3 class="font-medium">Email</h3>
+          <p class="text-sm text-secondary">hola@saalcazar.dev</p>
+        </div>
+      </a>
+
+      <a
+        href="https://github.com/saalcazar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
+      >
+        <div class="p-3 bg-accent/20 rounded-lg">
+          <IconGitHub size={24} />
+        </div>
+        <div>
+          <h3 class="font-medium">GitHub</h3>
+          <p class="text-sm text-secondary">@saalcazar</p>
+        </div>
+      </a>
+
+      <a
+        href="https://linkedin.com/in/saalcazar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
+      >
+        <div class="p-3 bg-accent/20 rounded-lg">
+          <IconLinkedIn size={24} />
+        </div>
+        <div>
+          <h3 class="font-medium">LinkedIn</h3>
+          <p class="text-sm text-secondary">/in/saalcazar</p>
+        </div>
+      </a>
+    </div>
+  </section>
+</Layout>

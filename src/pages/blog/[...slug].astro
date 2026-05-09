@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Calendar, Clock, Tag } from '@lucide/astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+const { Content } = await render(post);
+---
+
+<Layout title={title} description={description}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold">{title}</h1>
+
+      <div class="flex flex-wrap items-center gap-4 text-sm text-secondary mt-4">
+        <span class="flex items-center gap-1.5">
+          <Calendar size={16} />
+          {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Clock size={16} />
+          5 min de lectura
+        </span>
+        {tags && tags.length > 0 && (
+          <span class="flex items-center gap-1.5">
+            <Tag size={16} />
+            {tags.join(', ')}
+          </span>
+        )}
+      </div>
+    </header>
+
+    <div class="prose prose-invert max-w-none">
+      <Content />
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import { experiences } from '../data/experience';
+---
+
+<Layout
+  title="Experiencia"
+  description="Mi trayectoria profesional como desarrollador FullStack."
+>
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold">Experiencia</h1>
+    <p class="text-secondary mt-2">Mi trayectoria profesional.</p>
+
+    <div class="space-y-6 mt-8">
+      {experiences.map((exp) => (
+        <ExperienceCard experience={exp} />
+      ))}
+    </div>
+  </section>
+</Layout>

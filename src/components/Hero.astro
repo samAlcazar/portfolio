@@ -1,0 +1,100 @@
+---
+import { ArrowDown, Code, Server, PenTool, Mail } from '@lucide/astro';
+---
+
+<section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <div class="lg:col-span-2 bg-tertiary/50 backdrop-blur rounded-xl p-6 lg:p-8 border border-primary/10">
+      <div class="flex flex-col md:flex-row items-start gap-6">
+        <div class="w-full md:w-2/5 flex flex-col items-center md:items-start">
+          <h1 class="text-3xl lg:text-4xl font-bold">
+            Samuel <span class="relative z-0 text-gray-300 after:-z-10 after:absolute after:bottom-1 after:-left-1 after:content-[''] after:bg-accent-2/70 after:w-[110%] after:h-3 after:block after:rotate-2">Alcazar</span>
+          </h1>
+          <figure class="mt-4">
+            <img
+              src="/profile.webp"
+              alt="Foto de perfil de Samuel Alcazar"
+              class="w-48 h-48 lg:w-60 lg:h-60 rounded-xl object-cover"
+            />
+          </figure>
+          <p class="relative z-0 mt-3 text-lg text-gray-300 after:-z-10 after:absolute after:bottom-0 after:-left-1 after:content-[''] after:bg-accent-2/50 after:w-[110%] after:h-2 after:block after:rotate-2">
+            FullStack Developer
+          </p>
+        </div>
+
+        <div class="w-full md:w-3/5">
+          <p class="text-sm text-secondary leading-relaxed">
+            Soy desarrollador Fullstack enfocado en crear aplicaciones web completas,
+            desde interfaces modernas hasta arquitecturas backend escalables.
+          </p>
+          <p class="text-sm text-secondary leading-relaxed mt-3">
+            Trabajo con tecnologías como React, Next.js y Tailwind en el frontend,
+            y Node.js en el backend, desarrollando APIs, integraciones y lógica de negocio.
+            Me enfoco en escribir código limpio, mantenible y orientado a rendimiento.
+          </p>
+          <p class="text-sm text-secondary leading-relaxed mt-3">
+            Me interesa construir productos reales, optimizar procesos y aportar soluciones
+            que generen impacto, manteniendo siempre buenas prácticas y una experiencia de usuario sólida.
+          </p>
+
+          <a
+            href="/projects"
+            class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          >
+            Ver proyectos
+            <ArrowDown size={18} />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+      <h2 class="font-semibold text-lg flex items-center gap-2">
+        <Code size={20} class="text-accent-2" />
+        Tecnologías
+      </h2>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">React</span>
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">Next.js</span>
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">Node.js</span>
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">Tailwind</span>
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">TypeScript</span>
+        <span class="px-3 py-1 bg-gray-800 rounded-lg text-sm">Astro</span>
+      </div>
+    </div>
+
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+      <h2 class="font-semibold text-lg flex items-center gap-2">
+        <Server size={20} class="text-accent" />
+        Áreas
+      </h2>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm flex items-center gap-1.5">
+          <Code size={14} /> Frontend
+        </span>
+        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm flex items-center gap-1.5">
+          <Server size={14} /> Backend
+        </span>
+        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm flex items-center gap-1.5">
+          <PenTool size={14} /> UI/UX
+        </span>
+      </div>
+    </div>
+
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+      <h2 class="font-semibold text-lg">Contacto</h2>
+      <p class="text-sm text-gray-400 mt-2">
+        ¿Tienes un proyecto? Hablemos.
+      </p>
+      <a
+        href="/contact"
+        class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-primary text-neutral rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
+      >
+        <Mail size={16} />
+        Escríbeme
+      </a>
+    </div>
+
+  </div>
+</section>
