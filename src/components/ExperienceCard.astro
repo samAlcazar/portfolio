@@ -24,4 +24,11 @@ const { experience } = Astro.props;
     </span>
   </div>
   <p class="text-sm text-secondary mt-3 leading-relaxed">{experience.description}</p>
+  {experience.techs && experience.techs.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mt-4">
+      {experience.techs.map((tech) => (
+        <span class="px-2.5 py-0.5 bg-tertiary/50 rounded-lg text-xs">{tech}</span>
+      ))}
+    </div>
+  )}
 </div>
