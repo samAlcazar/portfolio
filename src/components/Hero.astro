@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { ArrowDown, Code, Server, PenTool, Mail } from '@lucide/astro';
+import profileImage from '../assets/profile.webp';
 ---
 
 <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
@@ -12,9 +14,12 @@ import { ArrowDown, Code, Server, PenTool, Mail } from '@lucide/astro';
             Samuel Alcazar
           </h1>
           <figure class="mt-4">
-            <img
-              src="/profile.webp"
+            <Image
+              src={profileImage}
               alt="Foto de perfil de Samuel Alcazar"
+              width={240}
+              height={240}
+              loading="eager"
               class="w-48 h-48 lg:w-60 lg:h-60 rounded-xl object-cover"
             />
           </figure>
