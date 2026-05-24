@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
+
+// Obtener todas las tecnologías únicas de los proyectos
+const allTechs = Array.from(
+  new Set(projects.flatMap((project) => project.techs))
+).sort();
 ---
 
 <Layout
@@ -12,10 +17,78 @@ import { projects } from '../data/projects';
     <h1 class="text-3xl font-bold">Proyectos</h1>
     <p class="text-secondary mt-2">Algunos de los proyectos en los que he trabajado.</p>
 
+    <!-- Filtros de Tecnologías -->
+    <div class="flex flex-wrap gap-2 mt-6" id="filter-buttons">
+      <button
+        data-filter="all"
+        class="px-4 py-1.5 rounded-lg text-sm font-medium bg-primary text-neutral border border-transparent transition-all cursor-pointer"
+      >
+        Todos
+      </button>
+      {allTechs.map((tech) => (
+        <button
+          data-filter={tech}
+          class="px-4 py-1.5 rounded-lg text-sm font-medium bg-tertiary/50 text-secondary border border-primary/10 hover:border-primary/20 hover:text-primary transition-all cursor-pointer"
+        >
+          {tech}
+        </button>
+      ))}
+    </div>
+
+    <!-- Rejilla de Proyectos -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
       {projects.map((project) => (
-        <ProjectCard project={project} />
+        <div
+          class="project-card-container transition-all duration-300 origin-center"
+          data-techs={project.techs.join(',')}
+        >
+          <ProjectCard project={project} />
+        </div>
       ))}
     </div>
   </section>
 </Layout>
+
+<script>
+  // Evento que funciona tanto al cargar por primera vez como con ClientRouter
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll('#filter-buttons button');
+    const cards = document.querySelectorAll('.project-card-container');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+
+        // Actualizar estados visuales de los botones
+        buttons.forEach((btn) => {
+          btn.classList.remove('bg-primary', 'text-neutral', 'border-transparent');
+          btn.classList.add('bg-tertiary/50', 'text-secondary', 'border-primary/10');
+        });
+        button.classList.remove('bg-tertiary/50', 'text-secondary', 'border-primary/10');
+        button.classList.add('bg-primary', 'text-neutral', 'border-transparent');
+
+        // Filtrar tarjetas con animaciones suaves
+        cards.forEach((card) => {
+          const cardElement = card as HTMLElement;
+          const techsAttr = cardElement.getAttribute('data-techs');
+          if (!techsAttr) return;
+
+          const techs = techsAttr.split(',');
+          if (filter === 'all' || techs.includes(filter || '')) {
+            cardElement.style.display = 'block';
+            setTimeout(() => {
+              cardElement.style.opacity = '1';
+              cardElement.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            cardElement.style.opacity = '0';
+            cardElement.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              cardElement.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  });
+</script>

@@ -10,7 +10,7 @@ export interface Props {
 const { project } = Astro.props;
 ---
 
-<div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex flex-col">
+<div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(37,88,136,0.15)] transition-all duration-300 flex flex-col">
   <h3 class="font-semibold text-lg">{project.title}</h3>
   <p class="text-sm text-secondary mt-2 flex-1">{project.description}</p>
 

@@ -2,74 +2,112 @@
 import { Image } from 'astro:assets';
 import { ArrowDown, Code, Server, PenTool, Mail } from '@lucide/astro';
 import profileImage from '../assets/profile.webp';
+import { technologies } from '../data/technologies';
+
+const getIconUrl = (name: string) => {
+  const slugs: Record<string, string> = {
+    "React": "react",
+    "Next.js": "nextdotjs/fff",
+    "Tailwind": "tailwindcss",
+    "Astro": "astro",
+    "TypeScript": "typescript",
+    "Node.js": "nodedotjs",
+    "PostgreSQL": "postgresql",
+    "MongoDB": "mongodb",
+    "Git": "git",
+    "Docker": "docker"
+  };
+  return `https://cdn.simpleicons.org/${slugs[name] || name.toLowerCase()}`;
+};
 ---
 
 <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-    <div class="lg:col-span-3 bg-tertiary/50 backdrop-blur rounded-xl p-6 lg:p-8 border border-primary/10">
-      <div class="flex flex-col md:flex-row items-start gap-6">
-        <div class="w-full md:w-2/5 flex flex-col items-center justify-center md:items-start">
-          <h1 class="text-3xl lg:text-4xl font-bold">
-            Samuel Alcazar
-          </h1>
-          <figure class="mt-4">
+    <div class="lg:col-span-3 bg-tertiary/50 backdrop-blur rounded-xl p-6 lg:p-8 border border-primary/10 opacity-0 animate-hero-card" style="animation-delay: 0ms;">
+      <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+        <div class="w-full md:w-1/3 flex justify-center">
+          <figure>
             <Image
               src={profileImage}
               alt="Foto de perfil de Samuel Alcazar"
               width={240}
               height={240}
               loading="eager"
-              class="w-48 h-48 lg:w-60 lg:h-60 rounded-xl object-cover"
+              class="w-48 h-48 lg:w-56 lg:h-56 rounded-xl object-cover shadow-[0_8px_30px_rgba(124,58,237,0.15)] border border-primary/5"
             />
           </figure>
-          <p class="mt-4 text-lg font-medium text-secondary">
-            FullStack Developer
-          </p>
         </div>
 
-        <div class="w-full md:w-3/5">
-          <p class="text-sm text-secondary leading-relaxed">
-            Soy desarrollador Fullstack enfocado en crear aplicaciones web completas,
-            desde interfaces modernas hasta arquitecturas backend escalables.
-          </p>
-          <p class="text-sm text-secondary leading-relaxed mt-3">
-            Trabajo con tecnologías como React, Next.js y Tailwind en el frontend,
-            y Node.js en el backend, desarrollando APIs, integraciones y lógica de negocio.
-            Me enfoco en escribir código limpio, mantenible y orientado a rendimiento.
-          </p>
-          <p class="text-sm text-secondary leading-relaxed mt-3">
-            Me interesa construir productos reales, optimizar procesos y aportar soluciones
-            que generen impacto, manteniendo siempre buenas prácticas y una experiencia de usuario sólida.
-          </p>
+        <div class="w-full md:w-2/3 text-center md:text-left flex flex-col justify-center">
+          <div>
+            <h1 class="text-3xl lg:text-4xl font-bold tracking-tight">
+              Samuel Alcazar
+            </h1>
+            <p class="text-lg lg:text-xl font-medium text-accent-2 mt-1">
+              FullStack Developer
+            </p>
+          </div>
 
-          <a
-            href="/projects"
-            class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-lg font-medium hover:bg-secondary/80 transition-colors"
-          >
-            Ver proyectos
-            <ArrowDown size={18} />
-          </a>
+          <div class="mt-4 space-y-3">
+            <p class="text-base lg:text-lg text-primary/90 leading-relaxed font-normal">
+              Soy desarrollador Fullstack enfocado en crear aplicaciones web completas,
+              desde interfaces modernas hasta arquitecturas backend escalables.
+            </p>
+            <p class="text-sm lg:text-base text-secondary leading-relaxed">
+              Trabajo con tecnologías como React, Next.js y Tailwind en el frontend,
+              y Node.js en el backend, desarrollando APIs, integraciones y lógica de negocio.
+              Me enfoco en escribir código limpio, mantenible y orientado a rendimiento.
+            </p>
+            <p class="text-sm lg:text-base text-secondary leading-relaxed">
+              Me interesa construir productos reales, optimizar procesos y aportar soluciones
+              que generen impacto, manteniendo siempre buenas prácticas y una experiencia de usuario sólida.
+            </p>
+          </div>
+
+          <div class="mt-6 flex justify-center md:justify-start">
+            <a
+              href="/projects"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-lg font-medium hover:bg-secondary/80 transition-colors"
+            >
+              Ver proyectos
+              <ArrowDown size={18} />
+            </a>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 opacity-0 animate-hero-card overflow-hidden" style="animation-delay: 150ms;">
       <h2 class="font-semibold text-lg flex items-center gap-2">
         <Code size={20} class="text-accent-2" />
         Tecnologías
       </h2>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">React</span>
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">Next.js</span>
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">Node.js</span>
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">Tailwind</span>
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">TypeScript</span>
-        <span class="px-3 py-1 bg-tertiary/50 rounded-lg text-sm">Astro</span>
+      <div class="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)] mt-5">
+        <div class="flex w-max gap-8 animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1.5 items-center">
+          {technologies.map((tech) => (
+            <img
+              src={getIconUrl(tech.name)}
+              alt={tech.name}
+              title={tech.name}
+              class="h-7 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+              loading="lazy"
+            />
+          ))}
+          {technologies.map((tech) => (
+            <img
+              src={getIconUrl(tech.name)}
+              alt={tech.name}
+              title={tech.name}
+              class="h-7 w-auto grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+              loading="lazy"
+            />
+          ))}
+        </div>
       </div>
     </div>
 
-    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 opacity-0 animate-hero-card" style="animation-delay: 300ms;">
       <h2 class="font-semibold text-lg flex items-center gap-2">
         <Server size={20} class="text-accent" />
         Áreas
@@ -87,7 +125,7 @@ import profileImage from '../assets/profile.webp';
       </div>
     </div>
 
-    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+    <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 opacity-0 animate-hero-card" style="animation-delay: 450ms;">
       <h2 class="font-semibold text-lg">Contacto</h2>
       <p class="text-sm text-secondary mt-2">
         ¿Tienes un proyecto? Hablemos.

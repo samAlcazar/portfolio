@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Mail } from '@lucide/astro';
+import { Mail, Send } from '@lucide/astro';
 import IconGitHub from '../components/IconGitHub.astro';
 import IconLinkedIn from '../components/IconLinkedIn.astro';
 ---
@@ -10,52 +10,175 @@ import IconLinkedIn from '../components/IconLinkedIn.astro';
   description="Ponte en contacto conmigo para colaborar en tu próximo proyecto."
 >
   <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-    <h1 class="text-3xl font-bold">Contacto</h1>
-    <p class="text-secondary mt-2">¿Tienes un proyecto en mente? Hablemos.</p>
+    <h1 class="text-3xl font-bold text-center md:text-left">Contacto</h1>
+    <p class="text-secondary mt-2 text-center md:text-left">¿Tienes un proyecto en mente o quieres charlar? Hablemos.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 max-w-2xl">
-      <a
-        href="mailto:alcazar.samuel@gmail.com"
-        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
-      >
-        <div class="p-3 bg-accent/20 rounded-lg">
-          <Mail size={24} class="text-accent" />
-        </div>
-        <div>
-          <h3 class="font-medium">Email</h3>
-           <p class="text-sm text-secondary">alcazar.samuel@gmail.com</p>
-        </div>
-      </a>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 max-w-4xl">
+      <!-- Columna Izquierda: Información de Contacto -->
+      <div class="flex flex-col gap-4">
+        <a
+          href="mailto:alcazar.samuel@gmail.com"
+          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+        >
+          <div class="p-3 bg-accent/20 rounded-lg text-accent">
+            <Mail size={24} />
+          </div>
+          <div>
+            <h3 class="font-medium text-primary">Email</h3>
+            <p class="text-sm text-secondary">alcazar.samuel@gmail.com</p>
+          </div>
+        </a>
 
-      <a
-        href="https://github.com/samAlcazar"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
-      >
-        <div class="p-3 bg-accent/20 rounded-lg">
-          <IconGitHub size={24} />
-        </div>
-        <div>
-          <h3 class="font-medium">GitHub</h3>
-           <p class="text-sm text-secondary">@samAlcazar</p>
-        </div>
-      </a>
+        <a
+          href="https://github.com/samAlcazar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+        >
+          <div class="p-3 bg-accent/20 rounded-lg text-accent">
+            <IconGitHub size={24} />
+          </div>
+          <div>
+            <h3 class="font-medium text-primary">GitHub</h3>
+            <p class="text-sm text-secondary">@samAlcazar</p>
+          </div>
+        </a>
 
-      <a
-        href="https://www.linkedin.com/in/samuel-alcazar-83b6b366/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 transition-colors flex items-center gap-4"
-      >
-        <div class="p-3 bg-accent/20 rounded-lg">
-          <IconLinkedIn size={24} />
-        </div>
-        <div>
-          <h3 class="font-medium">LinkedIn</h3>
-           <p class="text-sm text-secondary">/in/samuel-alcazar-83b6b366</p>
-        </div>
-      </a>
+        <a
+          href="https://www.linkedin.com/in/samuel-alcazar-83b6b366/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+        >
+          <div class="p-3 bg-accent/20 rounded-lg text-accent">
+            <IconLinkedIn size={24} />
+          </div>
+          <div>
+            <h3 class="font-medium text-primary">LinkedIn</h3>
+            <p class="text-sm text-secondary">/in/samuel-alcazar-83b6b366</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Columna Derecha: Formulario de Contacto Interactivo -->
+      <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+        <form id="contact-form" class="space-y-4">
+          <!-- TODO: Reemplaza "YOUR_ACCESS_KEY_HERE" con tu clave de Web3Forms (https://web3forms.com) -->
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
+          <div>
+            <label for="name" class="block text-sm font-medium text-primary/80 mb-1.5">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Tu nombre"
+              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-primary/80 mb-1.5">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="tu@correo.com"
+              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200"
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-primary/80 mb-1.5">Mensaje</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              placeholder="¿En qué puedo ayudarte?"
+              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200 resize-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-lg font-medium hover:bg-secondary/80 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span>Enviar mensaje</span>
+            <Send size={16} />
+          </button>
+
+          <!-- Contenedor para mostrar mensajes de éxito/error -->
+          <div id="form-result" class="hidden text-sm p-3 rounded-lg text-center font-medium transition-all duration-300"></div>
+        </form>
+      </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const result = document.getElementById('form-result');
+
+    if (form && result) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const submitSpan = submitButton.querySelector('span');
+
+        if (submitButton && submitSpan) {
+          submitButton.disabled = true;
+          submitSpan.textContent = 'Enviando...';
+        }
+
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        result.classList.remove('hidden', 'bg-green-500/10', 'text-green-400', 'bg-red-500/10', 'text-red-400');
+        result.classList.add('hidden');
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: json,
+        })
+          .then(async (response) => {
+            const res = await response.json();
+            result.classList.remove('hidden');
+            if (response.status === 200) {
+              result.classList.add('bg-green-500/10', 'text-green-400');
+              result.textContent = '¡Mensaje enviado con éxito! Me pondré en contacto pronto.';
+              form.reset();
+            } else {
+              result.classList.add('bg-red-500/10', 'text-red-400');
+              result.textContent = res.message || 'Ocurrió un error. Inténtalo de nuevo.';
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            result.classList.remove('hidden');
+            result.classList.add('bg-red-500/10', 'text-red-400');
+            result.textContent = 'Error de red. Por favor, verifica tu conexión.';
+          })
+          .then(() => {
+            if (submitButton && submitSpan) {
+              submitButton.disabled = false;
+              submitSpan.textContent = 'Enviar mensaje';
+            }
+            setTimeout(() => {
+              result.classList.add('hidden');
+            }, 6000);
+          });
+      });
+    }
+  });
+</script>

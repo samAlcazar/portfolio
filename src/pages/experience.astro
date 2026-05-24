@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import { experiences } from '../data/experience';
+
+// Calcular años de experiencia desde 2009
+const startYear = 2009;
+const currentYear = new Date().getFullYear();
+const yearsOfExperience = currentYear - startYear;
 ---
 
 <Layout
@@ -9,13 +14,42 @@ import { experiences } from '../data/experience';
   description="Mi trayectoria profesional como desarrollador FullStack."
 >
   <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-    <h1 class="text-3xl font-bold">Experiencia</h1>
-    <p class="text-secondary mt-2">Mi trayectoria profesional.</p>
 
-    <div class="space-y-6 mt-8">
-      {experiences.map((exp) => (
-        <ExperienceCard experience={exp} />
+    <!-- Header -->
+    <div class="max-w-2xl">
+      <h1 class="text-3xl font-bold">Experiencia</h1>
+      <p class="text-secondary mt-2 leading-relaxed">
+        Mi trayectoria profesional a lo largo de los años, desde la educación y diseño hasta el desarrollo fullstack.
+      </p>
+    </div>
+
+    <!-- Stats rápidas -->
+    <div class="flex flex-wrap gap-4 mt-8">
+      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
+        <span class="text-2xl font-bold text-accent">{yearsOfExperience}+</span>
+        <span class="text-sm text-secondary">Años de trayectoria</span>
+      </div>
+      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
+        <span class="text-2xl font-bold text-accent-2">{experiences.length}</span>
+        <span class="text-sm text-secondary">Posiciones</span>
+      </div>
+      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
+        <span class="text-2xl font-bold text-accent">5+</span>
+        <span class="text-sm text-secondary">Proyectos entregados</span>
+      </div>
+    </div>
+
+    <!-- Línea de tiempo -->
+    <div class="mt-12 max-w-3xl">
+      {experiences.map((exp, index) => (
+        <ExperienceCard
+          experience={exp}
+          index={index}
+          isLast={index === experiences.length - 1}
+        />
       ))}
     </div>
+
   </section>
 </Layout>
+

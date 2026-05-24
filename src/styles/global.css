@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-primary: #ffffff;
@@ -7,4 +8,42 @@
   --color-neutral: #09090b;
   --color-accent: #255888;
   --color-accent-2: #7c3aed;
+
+  /* Nuevas Animaciones */
+  --animate-fade-in-up: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-border-glow: border-glow 8s ease-in-out infinite;
+  --animate-hero-card: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards, border-glow 8s ease-in-out infinite;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes border-glow {
+    0%, 100% {
+      border-color: rgba(37, 88, 136, 0.15); /* color-accent con opacidad */
+      box-shadow: 0 0 15px rgba(37, 88, 136, 0.03);
+    }
+    50% {
+      border-color: rgba(124, 58, 237, 0.3); /* color-accent-2 con opacidad */
+      box-shadow: 0 0 25px rgba(124, 58, 237, 0.08);
+    }
+  }
+
+  --animate-marquee: marquee 20s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
