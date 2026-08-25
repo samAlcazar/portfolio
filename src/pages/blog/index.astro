@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getCollection } from 'astro:content';
+import { BookOpen } from '@lucide/astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort(
@@ -10,17 +11,37 @@ const sortedPosts = posts.sort(
 ---
 
 <Layout
-  title="Blog"
-  description="Artículos sobre desarrollo web, tecnología y más."
+  title="Blog | Samuel Alejandro Alcázar"
+  description="Artículos técnicos, tutoriales y reflexiones sobre desarrollo web fullstack, Linux, redes e infraestructura."
 >
   <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-    <h1 class="text-3xl font-bold">Blog</h1>
-    <p class="text-secondary mt-2">Artículos sobre desarrollo web y tecnología.</p>
+    
+    <!-- Header -->
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <BookOpen size={13} />
+        <span>Publicaciones & Artículos</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Blog & Notas Técnicas
+      </h1>
+      <p class="text-secondary text-sm sm:text-base mt-2 leading-relaxed">
+        Espacio donde comparto aprendizajes, resolución de desafíos técnicos en desarrollo web, administración de sistemas Linux e infraestructura.
+      </p>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <!-- Rejilla de Artículos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
       {sortedPosts.map((post) => (
         <BlogCard post={post} />
       ))}
     </div>
+
+    {sortedPosts.length === 0 && (
+      <div class="text-center py-16 bg-tertiary/20 rounded-2xl border border-primary/5 mt-8">
+        <p class="text-secondary text-sm">Próximamente nuevos artículos técnicos.</p>
+      </div>
+    )}
+
   </section>
 </Layout>

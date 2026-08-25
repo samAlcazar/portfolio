@@ -1,30 +1,39 @@
-# Portfolio — Samuel Alcazar
+# SAAlcazar.dev — Portfolio v2.0
 
-Portfolio personal desarrollado con [Astro](https://astro.build) y [Tailwind CSS](https://tailwindcss.com).
+Portafolio profesional de **Samuel Alejandro Alcázar** enfocado en **Desarrollo FullStack, Arquitectura de APIs, Servidores Linux y Soluciones de Infraestructura**.
 
-## Estructura
+Desarrollado con [Astro](https://astro.build) v6 y [Tailwind CSS](https://tailwindcss.com) v4.
+
+---
+
+## 🏛️ Estructura del Proyecto
 
 ```
 /
 ├── public/
 │   ├── favicon.svg
-│   └── profile.webp
+│   ├── profile.webp
+│   └── robots.txt
 ├── src/
+│   ├── assets/
+│   │   └── profile.webp
 │   ├── components/
 │   │   ├── BlogCard.astro
 │   │   ├── ExperienceCard.astro
 │   │   ├── Footer.astro
 │   │   ├── Hero.astro
+│   │   ├── IconGitHub.astro
+│   │   ├── IconLinkedIn.astro
 │   │   ├── Navbar.astro
 │   │   ├── ProjectCard.astro
-│   │   ├── SEO.astro
-│   │   └── SkillBadge.astro
+│   │   └── SEO.astro
 │   ├── content/
-│   │   ├── config.ts
 │   │   └── blog/
 │   │       └── hello-world.md
+│   ├── content.config.ts
 │   ├── data/
 │   │   ├── experience.ts
+│   │   ├── profile.ts
 │   │   ├── projects.ts
 │   │   └── technologies.ts
 │   ├── layouts/
@@ -33,10 +42,16 @@ Portfolio personal desarrollado con [Astro](https://astro.build) y [Tailwind CSS
 │   │   ├── blog/
 │   │   │   ├── [...slug].astro
 │   │   │   └── index.astro
+│   │   ├── projects/
+│   │   │   └── [id].astro
+│   │   ├── 404.astro
+│   │   ├── about.astro
 │   │   ├── contact.astro
+│   │   ├── cv.astro
 │   │   ├── experience.astro
 │   │   ├── index.astro
-│   │   └── projects.astro
+│   │   ├── projects.astro
+│   │   └── technologies.astro
 │   └── styles/
 │       └── global.css
 ├── astro.config.mjs
@@ -44,11 +59,21 @@ Portfolio personal desarrollado con [Astro](https://astro.build) y [Tailwind CSS
 └── tsconfig.json
 ```
 
-## Comandos
+---
+
+## 🚀 Comandos
 
 | Comando | Acción |
 |---------|--------|
-| `pnpm dev` | Inicia servidor de desarrollo en `localhost:4321` |
-| `pnpm build` | Construye el sitio en `./dist/` |
-| `pnpm preview` | Vista previa de la build |
-| `pnpm check` | Ejecuta type-checking |
+| `pnpm dev` | Inicia el servidor de desarrollo en `localhost:4321` |
+| `pnpm build` | Compila el sitio estático optimizado en `./dist/` |
+| `pnpm preview` | Vista previa local de la versión de producción |
+| `pnpm check` | Ejecuta el type-checking de Astro y TypeScript |
+
+---
+
+## 🛡️ Propuesta de Valor
+
+> **Infraestructura → Servidor → Backend → Base de datos → API → Frontend → Usuario**
+
+Enfoque integral que une desarrollo de software, arquitectura de bases de datos y administración de servidores para crear soluciones tecnológicas reales y escalables.

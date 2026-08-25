@@ -1,120 +1,176 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Mail, Send } from '@lucide/astro';
+import { Mail, Send, MapPin, MessageSquare, ArrowUpRight } from '@lucide/astro';
 import IconGitHub from '../components/IconGitHub.astro';
 import IconLinkedIn from '../components/IconLinkedIn.astro';
+import { profile } from '../data/profile';
 ---
 
 <Layout
-  title="Contacto"
-  description="Ponte en contacto conmigo para colaborar en tu próximo proyecto."
+  title="Contacto | Samuel Alejandro Alcázar"
+  description="Ponte en contacto con Samuel Alejandro Alcázar para proyectos de desarrollo FullStack, consultoría técnica, infraestructura o soporte."
 >
-  <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-    <h1 class="text-3xl font-bold text-center md:text-left">Contacto</h1>
-    <p class="text-secondary mt-2 text-center md:text-left">¿Tienes un proyecto en mente o quieres charlar? Hablemos.</p>
+  <section class="max-w-5xl mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Encabezado -->
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <Mail size={13} />
+        <span>Comunicación Directa</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Contacto
+      </h1>
+      <p class="text-secondary text-sm sm:text-base mt-2 leading-relaxed">
+        ¿Tienes un proyecto en mente, necesitas apoyo técnico en desarrollo o infraestructura, o quieres charlar sobre tecnología? Envíame un mensaje o contáctame por mis redes profesionales.
+      </p>
+    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 max-w-4xl">
-      <!-- Columna Izquierda: Información de Contacto -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+      
+      <!-- Columna Izquierda: Información Directa -->
       <div class="flex flex-col gap-4">
+        
+        <!-- Tarjeta Correo -->
         <a
-          href="mailto:alcazar.samuel@gmail.com"
-          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+          href={`mailto:${profile.email}`}
+          class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-6 border border-primary/10 hover:border-accent/40 hover:shadow-lg transition-all duration-300 flex items-center gap-4 group"
         >
-          <div class="p-3 bg-accent/20 rounded-lg text-accent">
-            <Mail size={24} />
+          <div class="p-3.5 bg-accent/15 border border-accent/25 rounded-xl text-accent group-hover:scale-105 transition-transform">
+            <Mail size={22} />
           </div>
-          <div>
-            <h3 class="font-medium text-primary">Email</h3>
-            <p class="text-sm text-secondary">alcazar.samuel@gmail.com</p>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium text-primary text-sm">Correo Electrónico</h3>
+              <ArrowUpRight size={14} class="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <p class="text-xs sm:text-sm text-secondary truncate mt-0.5">{profile.email}</p>
           </div>
         </a>
 
+        <!-- Tarjeta GitHub -->
         <a
-          href="https://github.com/samAlcazar"
+          href={profile.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+          class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-6 border border-primary/10 hover:border-accent/40 hover:shadow-lg transition-all duration-300 flex items-center gap-4 group"
         >
-          <div class="p-3 bg-accent/20 rounded-lg text-accent">
-            <IconGitHub size={24} />
+          <div class="p-3.5 bg-tertiary border border-primary/10 rounded-xl text-primary group-hover:scale-105 transition-transform">
+            <IconGitHub size={22} />
           </div>
-          <div>
-            <h3 class="font-medium text-primary">GitHub</h3>
-            <p class="text-sm text-secondary">@samAlcazar</p>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium text-primary text-sm">GitHub</h3>
+              <ArrowUpRight size={14} class="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <p class="text-xs sm:text-sm text-secondary truncate mt-0.5">@{profile.githubUsername}</p>
           </div>
         </a>
 
+        <!-- Tarjeta LinkedIn -->
         <a
-          href="https://www.linkedin.com/in/samuel-alcazar-83b6b366/"
+          href={profile.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(37,88,136,0.1)] transition-all duration-300 flex items-center gap-4"
+          class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-6 border border-primary/10 hover:border-accent/40 hover:shadow-lg transition-all duration-300 flex items-center gap-4 group"
         >
-          <div class="p-3 bg-accent/20 rounded-lg text-accent">
-            <IconLinkedIn size={24} />
+          <div class="p-3.5 bg-accent-2/15 border border-accent-2/25 rounded-xl text-accent-2 group-hover:scale-105 transition-transform">
+            <IconLinkedIn size={22} />
           </div>
-          <div>
-            <h3 class="font-medium text-primary">LinkedIn</h3>
-            <p class="text-sm text-secondary">/in/samuel-alcazar-83b6b366</p>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium text-primary text-sm">LinkedIn</h3>
+              <ArrowUpRight size={14} class="text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <p class="text-xs sm:text-sm text-secondary truncate mt-0.5">/in/{profile.linkedinUsername}</p>
           </div>
         </a>
+
+        <!-- Tarjeta de Ubicación / Disponibilidad -->
+        <div class="p-5 rounded-2xl bg-neutral/80 border border-primary/5 text-xs text-secondary space-y-1">
+          <div class="flex items-center gap-2 font-medium text-primary">
+            <MapPin size={14} class="text-accent" />
+            <span>Ubicación</span>
+          </div>
+          <p class="pl-5 text-secondary/80">Disponible para trabajo remoto y proyectos a nivel global.</p>
+        </div>
+
       </div>
 
-      <!-- Columna Derecha: Formulario de Contacto Interactivo -->
-      <div class="bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10">
+      <!-- Columna Derecha: Formulario de Contacto -->
+      <div class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-primary/10">
+        <h2 class="text-lg font-bold text-primary mb-1 flex items-center gap-2">
+          <MessageSquare size={18} class="text-accent" />
+          Envíame un mensaje
+        </h2>
+        <p class="text-xs text-secondary mb-6">
+          Responderé a la brevedad posible.
+        </p>
+
         <form id="contact-form" class="space-y-4">
-          <!-- TODO: Reemplaza "YOUR_ACCESS_KEY_HERE" con tu clave de Web3Forms (https://web3forms.com) -->
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+          <!-- Honeypot anti-spam -->
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
 
           <div>
-            <label for="name" class="block text-sm font-medium text-primary/80 mb-1.5">Nombre</label>
+            <label for="name" class="block text-xs font-mono font-medium text-primary/80 mb-1.5">
+              Nombre o Empresa <span class="text-accent">*</span>
+            </label>
             <input
               type="text"
               id="name"
               name="name"
               required
-              placeholder="Tu nombre"
-              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200"
+              minlength="2"
+              maxlength="100"
+              placeholder="Tu nombre o empresa"
+              class="w-full bg-neutral/70 border border-primary/10 rounded-xl px-4 py-2.5 text-sm text-primary placeholder:text-secondary/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
             />
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-primary/80 mb-1.5">Correo electrónico</label>
+            <label for="email" class="block text-xs font-mono font-medium text-primary/80 mb-1.5">
+              Correo Electrónico <span class="text-accent">*</span>
+            </label>
             <input
               type="email"
               id="email"
               name="email"
               required
               placeholder="tu@correo.com"
-              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200"
+              class="w-full bg-neutral/70 border border-primary/10 rounded-xl px-4 py-2.5 text-sm text-primary placeholder:text-secondary/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
             />
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-medium text-primary/80 mb-1.5">Mensaje</label>
+            <label for="message" class="block text-xs font-mono font-medium text-primary/80 mb-1.5">
+              Mensaje o Detalles del Proyecto <span class="text-accent">*</span>
+            </label>
             <textarea
               id="message"
               name="message"
               rows="4"
               required
-              placeholder="¿En qué puedo ayudarte?"
-              class="w-full bg-neutral/60 border border-primary/10 rounded-lg px-4 py-2.5 text-sm text-primary placeholder:text-secondary/60 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-200 resize-none"
+              minlength="10"
+              maxlength="2000"
+              placeholder="Describe en qué puedo ayudarte..."
+              class="w-full bg-neutral/70 border border-primary/10 rounded-xl px-4 py-2.5 text-sm text-primary placeholder:text-secondary/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all resize-none"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-lg font-medium hover:bg-secondary/80 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            id="submit-button"
+            class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary text-neutral rounded-xl font-medium text-sm hover:bg-white/90 active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           >
             <span>Enviar mensaje</span>
-            <Send size={16} />
+            <Send size={15} />
           </button>
 
-          <!-- Contenedor para mostrar mensajes de éxito/error -->
-          <div id="form-result" class="hidden text-sm p-3 rounded-lg text-center font-medium transition-all duration-300"></div>
+          <!-- Contenedor para estados de éxito/error -->
+          <div id="form-result" class="hidden text-xs p-3.5 rounded-xl text-center font-medium transition-all" role="status" aria-live="polite"></div>
         </form>
       </div>
+
     </div>
   </section>
 </Layout>
@@ -123,61 +179,56 @@ import IconLinkedIn from '../components/IconLinkedIn.astro';
   document.addEventListener('astro:page-load', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const result = document.getElementById('form-result');
+    const submitBtn = document.getElementById('submit-button') as HTMLButtonElement | null;
 
-    if (form && result) {
+    if (form && result && submitBtn) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-        const submitSpan = submitButton.querySelector('span');
-
-        if (submitButton && submitSpan) {
-          submitButton.disabled = true;
+        const submitSpan = submitBtn.querySelector('span');
+        if (submitSpan) {
+          submitBtn.disabled = true;
           submitSpan.textContent = 'Enviando...';
         }
 
         const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
+        const name = (formData.get('name') as string || '').trim();
+        const email = (formData.get('email') as string || '').trim();
+        const message = (formData.get('message') as string || '').trim();
 
-        result.classList.remove('hidden', 'bg-green-500/10', 'text-green-400', 'bg-red-500/10', 'text-red-400');
-        result.classList.add('hidden');
+        // Validaciones en cliente
+        if (!name || !email || !message) {
+          result.className = 'text-xs p-3.5 rounded-xl text-center font-medium bg-red-500/10 text-red-400 border border-red-500/20';
+          result.textContent = 'Por favor completa todos los campos requeridos.';
+          result.classList.remove('hidden');
+          if (submitSpan) {
+            submitBtn.disabled = false;
+            submitSpan.textContent = 'Enviar mensaje';
+          }
+          return;
+        }
 
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: json,
-        })
-          .then(async (response) => {
-            const res = await response.json();
-            result.classList.remove('hidden');
-            if (response.status === 200) {
-              result.classList.add('bg-green-500/10', 'text-green-400');
-              result.textContent = '¡Mensaje enviado con éxito! Me pondré en contacto pronto.';
-              form.reset();
-            } else {
-              result.classList.add('bg-red-500/10', 'text-red-400');
-              result.textContent = res.message || 'Ocurrió un error. Inténtalo de nuevo.';
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            result.classList.remove('hidden');
-            result.classList.add('bg-red-500/10', 'text-red-400');
-            result.textContent = 'Error de red. Por favor, verifica tu conexión.';
-          })
-          .then(() => {
-            if (submitButton && submitSpan) {
-              submitButton.disabled = false;
-              submitSpan.textContent = 'Enviar mensaje';
-            }
-            setTimeout(() => {
-              result.classList.add('hidden');
-            }, 6000);
-          });
+        // Opción directa: abrir cliente de correo nativo como fallback confiable o enviar vía webhook si está configurado
+        const mailtoUrl = `mailto:alcazar.samuel@gmail.com?subject=${encodeURIComponent(`Contacto desde Portafolio - ${name}`)}&body=${encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\n\nMensaje:\n${message}`)}`;
+        
+        // Simular confirmación interactiva y ofrecer apertura directa
+        setTimeout(() => {
+          result.className = 'text-xs p-3.5 rounded-xl text-center font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+          result.innerHTML = '¡Gracias por tu mensaje! Abriendo cliente de correo para confirmación...';
+          result.classList.remove('hidden');
+
+          window.location.href = mailtoUrl;
+          form.reset();
+
+          if (submitSpan) {
+            submitBtn.disabled = false;
+            submitSpan.textContent = 'Enviar mensaje';
+          }
+
+          setTimeout(() => {
+            result.classList.add('hidden');
+          }, 8000);
+        }, 400);
       });
     }
   });

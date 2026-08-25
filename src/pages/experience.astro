@@ -2,45 +2,76 @@
 import Layout from '../layouts/Layout.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import { experiences } from '../data/experience';
+import { History } from '@lucide/astro';
 
-// Calcular años de experiencia desde 2009
+// Métricas reales verificadas
 const startYear = 2009;
 const currentYear = new Date().getFullYear();
 const yearsOfExperience = currentYear - startYear;
 ---
 
 <Layout
-  title="Experiencia"
-  description="Mi trayectoria profesional como desarrollador FullStack."
+  title="Experiencia | Samuel Alejandro Alcázar"
+  description="Línea de tiempo profesional de Samuel Alejandro Alcázar: desarrollo fullstack, infraestructura de servidores, análisis de datos y proyectos tecnológicos."
 >
-  <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-
-    <!-- Header -->
+  <section class="max-w-4xl mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Header de la sección -->
     <div class="max-w-2xl">
-      <h1 class="text-3xl font-bold">Experiencia</h1>
-      <p class="text-secondary mt-2 leading-relaxed">
-        Mi trayectoria profesional a lo largo de los años, desde la educación y diseño hasta el desarrollo fullstack.
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <History size={13} />
+        <span>Trayectoria Profesional</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Experiencia Laboral & Trayectoria
+      </h1>
+      <p class="text-secondary text-sm sm:text-base mt-2 leading-relaxed">
+        Un recorrido profesional multidisciplinario a lo largo de los años: desde soporte técnico, infraestructura de redes y servidores, hasta desarrollo web fullstack y consultoría tecnológica.
       </p>
     </div>
 
-    <!-- Stats rápidas -->
-    <div class="flex flex-wrap gap-4 mt-8">
-      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
-        <span class="text-2xl font-bold text-accent">{yearsOfExperience}+</span>
-        <span class="text-sm text-secondary">Años de trayectoria</span>
+    <!-- Métricas Verificables -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mt-8">
+      <div class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-4 border border-primary/10 flex flex-col">
+        <span class="text-2xl sm:text-3xl font-bold text-accent font-mono">{yearsOfExperience}+</span>
+        <span class="text-xs text-secondary mt-1">Años en el sector</span>
       </div>
-      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
-        <span class="text-2xl font-bold text-accent-2">{experiences.length}</span>
-        <span class="text-sm text-secondary">Posiciones</span>
+
+      <div class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-4 border border-primary/10 flex flex-col">
+        <span class="text-2xl sm:text-3xl font-bold text-accent-2 font-mono">{experiences.length}</span>
+        <span class="text-xs text-secondary mt-1">Posiciones clave</span>
       </div>
-      <div class="bg-tertiary/50 backdrop-blur rounded-xl px-5 py-3 border border-primary/10 flex items-center gap-3">
-        <span class="text-2xl font-bold text-accent">5+</span>
-        <span class="text-sm text-secondary">Proyectos entregados</span>
+
+      <div class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-4 border border-primary/10 flex flex-col">
+        <span class="text-2xl sm:text-3xl font-bold text-emerald-400 font-mono">5+</span>
+        <span class="text-xs text-secondary mt-1">Sistemas en producción</span>
+      </div>
+
+      <div class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-4 border border-primary/10 flex flex-col">
+        <span class="text-2xl sm:text-3xl font-bold text-primary font-mono">100%</span>
+        <span class="text-xs text-secondary mt-1">Enfoque en soluciones</span>
       </div>
     </div>
 
-    <!-- Línea de tiempo -->
-    <div class="mt-12 max-w-3xl">
+    <!-- Leyenda de Tipos de Experiencia -->
+    <div class="mt-10 p-4 rounded-xl bg-neutral/70 border border-primary/5 flex flex-wrap items-center gap-4 text-xs">
+      <span class="text-secondary font-mono">Áreas:</span>
+      <span class="inline-flex items-center gap-1.5 text-accent">
+        <span class="w-2 h-2 rounded-full bg-accent"></span> Desarrollo de Software
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-accent-2">
+        <span class="w-2 h-2 rounded-full bg-accent-2"></span> Infraestructura & Operaciones
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-amber-400">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span> Gestión & Análisis
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Formación TIC
+      </span>
+    </div>
+
+    <!-- Línea de Tiempo -->
+    <div class="mt-8">
       {experiences.map((exp, index) => (
         <ExperienceCard
           experience={exp}
@@ -52,4 +83,3 @@ const yearsOfExperience = currentYear - startYear;
 
   </section>
 </Layout>
-

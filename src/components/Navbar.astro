@@ -1,7 +1,26 @@
 ---
-import { House, Briefcase, BookOpen, Mail, Menu } from '@lucide/astro';
+import {
+  House,
+  User,
+  Briefcase,
+  History,
+  Layers,
+  BookOpen,
+  Mail,
+  FileText,
+  Menu,
+  X
+} from '@lucide/astro';
+import IconGitHub from './IconGitHub.astro';
 
 const pathname = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === '/') {
+    return pathname === '/';
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
 
 interface NavLink {
   href: string;
@@ -11,64 +30,161 @@ interface NavLink {
 
 const links: NavLink[] = [
   { href: "/", label: "Inicio", icon: House },
+  { href: "/about", label: "Sobre mí", icon: User },
   { href: "/projects", label: "Proyectos", icon: Briefcase },
-  { href: "/experience", label: "Experiencia", icon: Briefcase },
+  { href: "/experience", label: "Experiencia", icon: History },
+  { href: "/technologies", label: "Tecnologías", icon: Layers },
   { href: "/blog", label: "Blog", icon: BookOpen },
   { href: "/contact", label: "Contacto", icon: Mail },
 ];
 ---
 
-<nav class="sticky top-0 z-50 bg-neutral/80 backdrop-blur border-b border-primary/10">
-  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold tracking-tight">
-      SAALCAZAR
+<header class="sticky top-0 z-50 bg-neutral/85 backdrop-blur-md border-b border-primary/10 transition-colors">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+    <!-- Logo / Identidad -->
+    <a
+      href="/"
+      class="flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg px-1 py-0.5"
+      aria-label="Ir al inicio de SAAlcazar"
+    >
+      <span class="w-8 h-8 rounded-lg bg-tertiary border border-primary/10 flex items-center justify-center font-mono font-bold text-sm text-accent group-hover:border-accent/40 group-hover:shadow-[0_0_12px_rgba(37,88,136,0.25)] transition-all">
+        SA
+      </span>
+      <div class="flex flex-col">
+        <span class="font-bold tracking-tight text-sm text-primary group-hover:text-white transition-colors">
+          SAALCAZAR
+        </span>
+        <span class="text-[10px] text-secondary font-mono tracking-wider">
+          FULLSTACK & INFRA
+        </span>
+      </div>
     </a>
 
-    <ul class="hidden md:flex items-center gap-1">
-      {
-        links.map(({ href, label, icon: Icon }) => (
-          <li>
-            <a
-              href={href}
-              class={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
-                pathname === href
-                  ? "bg-tertiary text-primary"
-                  : "text-secondary hover:text-primary hover:bg-tertiary/50"
-              }`}
-            >
-              <Icon size={16} />
-              {label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-
-    <details class="md:hidden">
-      <summary class="list-none cursor-pointer p-2">
-        <Menu size={24} />
-      </summary>
-      <div class="absolute top-16 left-0 right-0 bg-neutral border-b border-primary/10 p-4">
-        <ul class="flex flex-col gap-1">
-          {
-            links.map(({ href, label, icon: Icon }) => (
+    <!-- Navegación Desktop -->
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+      <ul class="flex items-center gap-1 list-none p-0 m-0">
+        {
+          links.map(({ href, label, icon: Icon }) => {
+            const active = isActive(href);
+            return (
               <li>
                 <a
                   href={href}
-                  class={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-colors ${
-                    pathname === href
-                      ? "bg-tertiary text-primary"
+                  class={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    active
+                      ? "bg-tertiary text-primary border border-primary/15 shadow-sm"
                       : "text-secondary hover:text-primary hover:bg-tertiary/50"
                   }`}
+                  aria-current={active ? "page" : undefined}
                 >
-                  <Icon size={18} />
+                  <Icon size={14} class={active ? "text-accent" : "opacity-70"} />
                   {label}
                 </a>
               </li>
-            ))
-          }
-        </ul>
+            );
+          })
+        }
+      </ul>
+    </nav>
+
+    <!-- Acciones secundarias (CV & GitHub) -->
+    <div class="hidden sm:flex items-center gap-2.5">
+      <a
+        href="https://github.com/samAlcazar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="p-2 text-secondary hover:text-primary hover:bg-tertiary/50 rounded-lg transition-colors border border-transparent hover:border-primary/10"
+        aria-label="Perfil de GitHub de Samuel Alcázar"
+      >
+        <IconGitHub size={18} />
+      </a>
+      <a
+        href="/cv"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-tertiary border border-primary/15 hover:border-accent/40 text-primary rounded-lg text-xs font-medium hover:bg-tertiary/80 transition-all shadow-sm"
+        aria-label="Ver Curriculum Vitae"
+      >
+        <FileText size={14} class="text-accent" />
+        CV
+      </a>
+    </div>
+
+    <!-- Menú Móvil (<details> accesible con cierre dinámico) -->
+    <details class="lg:hidden group/mobile" id="mobile-menu-details">
+      <summary
+        class="list-none cursor-pointer p-2 rounded-lg text-secondary hover:text-primary hover:bg-tertiary/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+        aria-label="Abrir o cerrar menú de navegación"
+      >
+        <Menu size={22} class="group-open/mobile:hidden" />
+        <X size={22} class="hidden group-open/mobile:block" />
+      </summary>
+
+      <div class="fixed top-16 left-0 right-0 bottom-0 bg-neutral/95 backdrop-blur-xl border-b border-primary/10 p-6 flex flex-col justify-between overflow-y-auto animate-fade-in-up z-50">
+        <nav class="flex flex-col gap-2" aria-label="Navegación móvil">
+          <p class="text-xs uppercase tracking-wider text-secondary/60 font-mono px-3 mb-1">
+            Navegación
+          </p>
+          <ul class="flex flex-col gap-1.5 list-none p-0 m-0">
+            {
+              links.map(({ href, label, icon: Icon }) => {
+                const active = isActive(href);
+                return (
+                  <li>
+                    <a
+                      href={href}
+                      class={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                        active
+                          ? "bg-tertiary text-primary border border-primary/15 shadow-sm font-semibold"
+                          : "text-secondary hover:text-primary hover:bg-tertiary/50"
+                      }`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      <Icon size={18} class={active ? "text-accent" : "opacity-70"} />
+                      {label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+
+        <div class="pt-6 mt-6 border-t border-primary/10 flex flex-col gap-3">
+          <a
+            href="/cv"
+            class="flex items-center justify-center gap-2 w-full py-3 bg-tertiary border border-primary/15 rounded-xl text-sm font-medium text-primary hover:bg-tertiary/80 transition-colors"
+          >
+            <FileText size={16} class="text-accent" />
+            Ver Curriculum Vitae
+          </a>
+          <div class="flex items-center justify-between px-2 text-xs text-secondary">
+            <span>© {new Date().getFullYear()} Samuel Alejandro Alcázar</span>
+            <a
+              href="https://github.com/samAlcazar"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-1 hover:text-primary transition-colors"
+            >
+              <IconGitHub size={14} />
+              GitHub
+            </a>
+          </div>
+        </div>
       </div>
     </details>
   </div>
-</nav>
+</header>
+
+<script>
+  // Cerrar menú móvil al navegar
+  document.addEventListener('astro:page-load', () => {
+    const details = document.getElementById('mobile-menu-details') as HTMLDetailsElement | null;
+    if (details) {
+      const mobileLinks = details.querySelectorAll('a');
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          details.removeAttribute('open');
+        });
+      });
+    }
+  });
+</script>

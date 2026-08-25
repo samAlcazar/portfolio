@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { technologyCategories } from '../data/technologies';
+import {
+  Layers,
+  Code,
+  Server,
+  Database,
+  Cpu,
+  Wrench,
+  Terminal,
+  ArrowRight
+} from '@lucide/astro';
+
+const iconMap = {
+  Code: Code,
+  Server: Server,
+  Database: Database,
+  Cpu: Cpu,
+  Wrench: Wrench,
+  Terminal: Terminal
+};
+
+const getIconUrl = (slug?: string) => {
+  if (!slug) return null;
+  return `https://cdn.simpleicons.org/${slug}`;
+};
+---
+
+<Layout
+  title="Tecnologías | Samuel Alejandro Alcázar"
+  description="Stack tecnológico de Samuel Alejandro Alcázar organizado por áreas: Frontend, Backend, Bases de Datos, Infraestructura y Herramientas."
+>
+  <section class="max-w-5xl mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Header -->
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <Layers size={13} />
+        <span>Stack & Conocimientos</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Tecnologías & Herramientas
+      </h1>
+      <p class="text-secondary text-sm sm:text-base mt-2 leading-relaxed">
+        Conjunto de herramientas, frameworks y sistemas que utilizo activamente en el diseño, desarrollo y despliegue de soluciones tecnológicas reales.
+      </p>
+    </div>
+
+    <!-- Categorías de Tecnologías -->
+    <div class="mt-12 space-y-10">
+      {technologyCategories.map((category) => {
+        const IconComponent = iconMap[category.iconName] || Code;
+        return (
+          <article class="bg-tertiary/30 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-primary/10 space-y-6">
+            
+            <!-- Encabezado de la Categoría -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-primary/10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-neutral/80 border border-primary/10 flex items-center justify-center text-accent">
+                  <IconComponent size={20} />
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-primary">{category.title}</h2>
+                  <p class="text-xs sm:text-sm text-secondary mt-0.5">{category.description}</p>
+                </div>
+              </div>
+              <span class="text-xs font-mono text-secondary/60 self-start sm:self-auto bg-tertiary/50 px-2.5 py-1 rounded-lg border border-primary/5">
+                {category.items.length} herramientas
+              </span>
+            </div>
+
+            <!-- Grilla de Items dentro de la Categoría -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {category.items.map((item) => (
+                <div class="p-4 rounded-xl bg-neutral/60 border border-primary/5 hover:border-primary/20 transition-all flex flex-col justify-between">
+                  <div class="flex items-center gap-3 mb-2">
+                    {item.slug && (
+                      <img
+                        src={getIconUrl(item.slug)}
+                        alt={item.name}
+                        class="w-5 h-5 opacity-80"
+                        loading="lazy"
+                      />
+                    )}
+                    <h3 class="font-semibold text-sm text-primary flex items-center gap-2">
+                      <span>{item.name}</span>
+                      {item.highlight && (
+                        <span class="w-1.5 h-1.5 rounded-full bg-accent" title="Tecnología principal"></span>
+                      )}
+                    </h3>
+                  </div>
+                  <p class="text-xs text-secondary leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- Enlaces de Navegación -->
+    <div class="mt-12 pt-8 border-t border-primary/10 flex flex-wrap items-center justify-between gap-4">
+      <p class="text-xs text-secondary">
+        Todas las tecnologías listadas han sido aplicadas en proyectos de producción, soporte o desarrollo.
+      </p>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-1.5 px-4 py-2 bg-tertiary text-primary border border-primary/15 rounded-xl text-xs font-medium hover:bg-tertiary/80 transition-colors"
+        >
+          <span>Ver proyectos que usan este stack</span>
+          <ArrowRight size={13} />
+        </a>
+      </div>
+    </div>
+
+  </section>
+</Layout>

@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { House, Briefcase, Mail } from '@lucide/astro';
+---
+
+<Layout
+  title="Página no encontrada (404) | Samuel Alejandro Alcázar"
+  description="La página que buscas no existe o ha sido movida."
+>
+  <section class="max-w-2xl mx-auto px-4 py-20 lg:py-32 text-center flex flex-col items-center justify-center">
+    
+    <span class="text-6xl sm:text-7xl font-bold font-mono text-accent/60">
+      404
+    </span>
+
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-primary mt-4">
+      Página no encontrada
+    </h1>
+
+    <p class="text-secondary text-sm sm:text-base mt-2 max-w-md">
+      El enlace que seguiste no existe o fue reubicado en la nueva versión del portafolio.
+    </p>
+
+    <!-- Botones de Acción -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-neutral rounded-xl font-medium text-xs sm:text-sm hover:bg-white/90 transition-all shadow-sm"
+      >
+        <House size={15} />
+        <span>Volver al inicio</span>
+      </a>
+
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-tertiary text-primary border border-primary/15 rounded-xl font-medium text-xs sm:text-sm hover:bg-tertiary/80 transition-colors"
+      >
+        <Briefcase size={15} class="text-accent" />
+        <span>Ver proyectos</span>
+      </a>
+
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-tertiary text-secondary hover:text-primary border border-primary/15 rounded-xl font-medium text-xs sm:text-sm hover:bg-tertiary/80 transition-colors"
+      >
+        <Mail size={15} />
+        <span>Contacto</span>
+      </a>
+    </div>
+
+  </section>
+</Layout>

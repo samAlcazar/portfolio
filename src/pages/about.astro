@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/profile';
+import {
+  User,
+  Cpu,
+  Code,
+  Terminal,
+  FileText,
+  Mail,
+  ArrowRight
+} from '@lucide/astro';
+
+const devSkills = [
+  { name: "Frontend", items: ["React", "Next.js", "Astro", "TypeScript", "Tailwind CSS", "HTML5 & CSS3"] },
+  { name: "Backend & APIs", items: ["Node.js", "Express", "APIs RESTful", "Autenticación & RBAC"] },
+  { name: "Bases de Datos", items: ["PostgreSQL", "MongoDB", "Modelado relacional", "Consultas optimizadas"] }
+];
+
+const infraSkills = [
+  { name: "Sistemas Operativos", items: ["Linux (Debian / Ubuntu)", "Gestión de procesos", "Permisos & Seguridad"] },
+  { name: "Servidores & Redes", items: ["Servidores VPS", "Nginx (Proxy reverso / SSL)", "Protocolos DNS / HTTP / TCP"] },
+  { name: "Contenerización & Despliegue", items: ["Docker", "Despliegues en producción", "Entornos reproducibles"] }
+];
+
+const toolSkills = [
+  { name: "Control de Versiones", items: ["Git", "GitHub", "Flujos de ramas & Pull Requests"] },
+  { name: "Línea de Comandos", items: ["Terminal Bash", "Scripts de automatización"] },
+  { name: "Herramientas de Build", items: ["Vite", "pnpm", "npm", "VS Code"] }
+];
+---
+
+<Layout
+  title={`Sobre mí | ${profile.name}`}
+  description="Conoce la trayectoria, perfil técnico y enfoque de desarrollo de Samuel Alejandro Alcázar."
+>
+  <section class="max-w-4xl mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Encabezado de Sección -->
+    <div class="mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <User size={13} />
+        <span>Perfil Profesional</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Sobre mí
+      </h1>
+      <p class="text-secondary text-base sm:text-lg mt-2 leading-relaxed">
+        Desarrollador FullStack con visión de sistemas, orientado a resolver problemas reales de extremo a extremo.
+      </p>
+    </div>
+
+    <!-- Biografía & Filosofía de Trabajo -->
+    <div class="bg-tertiary/30 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-primary/10 space-y-4 text-sm sm:text-base text-secondary leading-relaxed">
+      {profile.bio.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+
+    <!-- Propuesta de Valor Central -->
+    <div class="mt-8 p-6 rounded-2xl bg-neutral/80 border-l-4 border-l-accent border-y border-r border-primary/10">
+      <h2 class="text-base font-semibold text-primary mb-1">
+        Propuesta de Valor
+      </h2>
+      <p class="text-sm text-secondary leading-relaxed">
+        “Desarrollador capaz de construir soluciones tecnológicas completas, combinando software, infraestructura y conocimientos de sistemas.”
+      </p>
+    </div>
+
+    <!-- Perfil Técnico Estructurado -->
+    <div class="mt-12 space-y-8">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-primary flex items-center gap-2">
+          <Code size={24} class="text-accent" />
+          Perfil Técnico
+        </h2>
+        <p class="text-sm text-secondary mt-1">
+          Estructura de conocimientos y herramientas aplicadas en proyectos de producción:
+        </p>
+      </div>
+
+      <!-- Bloque 1: Desarrollo -->
+      <div class="bg-tertiary/40 rounded-2xl p-6 border border-primary/10">
+        <div class="flex items-center gap-2 text-primary font-semibold text-lg mb-4">
+          <Code size={18} class="text-accent" />
+          <h3>1. Desarrollo de Software</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {devSkills.map((cat) => (
+            <div class="p-4 rounded-xl bg-neutral/60 border border-primary/5">
+              <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-accent mb-2">
+                {cat.name}
+              </h4>
+              <ul class="space-y-1 text-xs text-secondary list-none p-0 m-0">
+                {cat.items.map((item) => (
+                  <li class="flex items-center gap-1.5">
+                    <span class="text-primary/40">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Bloque 2: Infraestructura -->
+      <div class="bg-tertiary/40 rounded-2xl p-6 border border-primary/10">
+        <div class="flex items-center gap-2 text-primary font-semibold text-lg mb-4">
+          <Cpu size={18} class="text-accent-2" />
+          <h3>2. Infraestructura & Sistemas</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {infraSkills.map((cat) => (
+            <div class="p-4 rounded-xl bg-neutral/60 border border-primary/5">
+              <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-accent-2 mb-2">
+                {cat.name}
+              </h4>
+              <ul class="space-y-1 text-xs text-secondary list-none p-0 m-0">
+                {cat.items.map((item) => (
+                  <li class="flex items-center gap-1.5">
+                    <span class="text-primary/40">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Bloque 3: Herramientas -->
+      <div class="bg-tertiary/40 rounded-2xl p-6 border border-primary/10">
+        <div class="flex items-center gap-2 text-primary font-semibold text-lg mb-4">
+          <Terminal size={18} class="text-emerald-400" />
+          <h3>3. Herramientas & Flujo de Trabajo</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {toolSkills.map((cat) => (
+            <div class="p-4 rounded-xl bg-neutral/60 border border-primary/5">
+              <h4 class="text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 mb-2">
+                {cat.name}
+              </h4>
+              <ul class="space-y-1 text-xs text-secondary list-none p-0 m-0">
+                {cat.items.map((item) => (
+                  <li class="flex items-center gap-1.5">
+                    <span class="text-primary/40">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTAs al final de la página -->
+    <div class="mt-12 pt-8 border-t border-primary/10 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a
+          href="/cv"
+          class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-neutral rounded-xl font-medium text-xs sm:text-sm hover:bg-white/90 transition-all shadow-sm"
+        >
+          <FileText size={15} />
+          <span>Ver Curriculum Vitae</span>
+        </a>
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-1.5 px-4 py-2.5 bg-tertiary text-primary border border-primary/15 rounded-xl font-medium text-xs sm:text-sm hover:bg-tertiary/80 transition-colors"
+        >
+          <span>Ver proyectos</span>
+          <ArrowRight size={14} />
+        </a>
+      </div>
+
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-accent/20 text-accent border border-accent/30 rounded-xl font-medium text-xs sm:text-sm hover:bg-accent/30 transition-colors"
+      >
+        <Mail size={15} />
+        <span>Iniciar contacto</span>
+      </a>
+    </div>
+
+  </section>
+</Layout>

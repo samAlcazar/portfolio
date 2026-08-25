@@ -2,93 +2,151 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
+import { Briefcase, ListFilter } from '@lucide/astro';
 
-// Obtener todas las tecnologías únicas de los proyectos
+// Obtener todas las tecnologías únicas
 const allTechs = Array.from(
   new Set(projects.flatMap((project) => project.techs))
 ).sort();
 ---
 
 <Layout
-  title="Proyectos"
-  description="Conoce los proyectos en los que he trabajado como desarrollador FullStack."
+  title="Proyectos | Samuel Alejandro Alcázar"
+  description="Explora proyectos reales de desarrollo FullStack, backend, interfaces modernas y soluciones de software creadas por Samuel Alejandro Alcázar."
 >
   <section class="max-w-6xl mx-auto px-4 py-12 lg:py-20">
-    <h1 class="text-3xl font-bold">Proyectos</h1>
-    <p class="text-secondary mt-2">Algunos de los proyectos en los que he trabajado.</p>
+    
+    <!-- Encabezado -->
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-tertiary border border-primary/10 text-xs font-mono text-accent mb-2">
+        <Briefcase size={13} />
+        <span>Portafolio de Trabajo</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
+        Proyectos & Soluciones Reales
+      </h1>
+      <p class="text-secondary text-sm sm:text-base mt-2 leading-relaxed">
+        Una selección de sistemas completos, aplicaciones web, APIs y proyectos de desarrollo orientados a resolver necesidades concretas de organizaciones, medios de comunicación y usuarios.
+      </p>
+    </div>
 
-    <!-- Filtros de Tecnologías -->
-    <div class="flex flex-wrap gap-2 mt-6" id="filter-buttons">
-      <button
-        data-filter="all"
-        class="px-4 py-1.5 rounded-lg text-sm font-medium bg-primary text-neutral border border-transparent transition-all cursor-pointer"
-      >
-        Todos
-      </button>
-      {allTechs.map((tech) => (
+    <!-- Barra de Filtros -->
+    <div class="mt-8 pt-6 border-t border-primary/10 space-y-3">
+      <div class="flex items-center gap-2 text-xs font-mono text-secondary">
+        <ListFilter size={13} class="text-accent" />
+        <span>Filtrar por tecnología:</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2" id="filter-buttons">
         <button
-          data-filter={tech}
-          class="px-4 py-1.5 rounded-lg text-sm font-medium bg-tertiary/50 text-secondary border border-primary/10 hover:border-primary/20 hover:text-primary transition-all cursor-pointer"
+          type="button"
+          data-filter="all"
+          class="px-3.5 py-1.5 rounded-xl text-xs font-medium bg-primary text-neutral border border-transparent transition-all cursor-pointer shadow-sm active-btn"
         >
-          {tech}
+          Todos ({projects.length})
         </button>
-      ))}
+        {allTechs.map((tech) => (
+          <button
+            type="button"
+            data-filter={tech}
+            class="px-3 py-1.5 rounded-xl text-xs font-medium bg-tertiary/50 text-secondary border border-primary/10 hover:border-accent/40 hover:text-primary transition-all cursor-pointer"
+          >
+            {tech}
+          </button>
+        ))}
+      </div>
     </div>
 
     <!-- Rejilla de Proyectos -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8" id="projects-grid">
       {projects.map((project) => (
         <div
-          class="project-card-container transition-all duration-300 origin-center"
+          class="project-card-container transition-all duration-300 origin-center flex flex-col"
           data-techs={project.techs.join(',')}
+          data-category={project.category}
         >
           <ProjectCard project={project} />
         </div>
       ))}
     </div>
+
+    <!-- Mensaje si no hay resultados -->
+    <div id="no-projects-message" class="hidden text-center py-16 bg-tertiary/20 rounded-2xl border border-primary/5 mt-8">
+      <p class="text-secondary text-sm">No se encontraron proyectos con la tecnología seleccionada.</p>
+      <button
+        type="button"
+        id="reset-filter-btn"
+        class="mt-3 px-4 py-2 bg-tertiary text-primary rounded-xl text-xs font-medium hover:bg-tertiary/80 transition-colors"
+      >
+        Mostrar todos los proyectos
+      </button>
+    </div>
+
   </section>
 </Layout>
 
 <script>
-  // Evento que funciona tanto al cargar por primera vez como con ClientRouter
   document.addEventListener('astro:page-load', () => {
     const buttons = document.querySelectorAll('#filter-buttons button');
     const cards = document.querySelectorAll('.project-card-container');
+    const noMessage = document.getElementById('no-projects-message');
+    const resetBtn = document.getElementById('reset-filter-btn');
+
+    const applyFilter = (filter: string | null) => {
+      let visibleCount = 0;
+
+      buttons.forEach((btn) => {
+        if (btn.getAttribute('data-filter') === filter) {
+          btn.classList.remove('bg-tertiary/50', 'text-secondary', 'border-primary/10');
+          btn.classList.add('bg-primary', 'text-neutral', 'border-transparent', 'shadow-sm');
+        } else {
+          btn.classList.remove('bg-primary', 'text-neutral', 'border-transparent', 'shadow-sm');
+          btn.classList.add('bg-tertiary/50', 'text-secondary', 'border-primary/10');
+        }
+      });
+
+      cards.forEach((card) => {
+        const cardElement = card as HTMLElement;
+        const techsAttr = cardElement.getAttribute('data-techs');
+        if (!techsAttr) return;
+
+        const techs = techsAttr.split(',');
+        if (filter === 'all' || techs.includes(filter || '')) {
+          cardElement.style.display = 'flex';
+          visibleCount++;
+          setTimeout(() => {
+            cardElement.style.opacity = '1';
+            cardElement.style.transform = 'scale(1)';
+          }, 10);
+        } else {
+          cardElement.style.opacity = '0';
+          cardElement.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            cardElement.style.display = 'none';
+          }, 200);
+        }
+      });
+
+      if (noMessage) {
+        if (visibleCount === 0) {
+          noMessage.classList.remove('hidden');
+        } else {
+          noMessage.classList.add('hidden');
+        }
+      }
+    };
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
-
-        // Actualizar estados visuales de los botones
-        buttons.forEach((btn) => {
-          btn.classList.remove('bg-primary', 'text-neutral', 'border-transparent');
-          btn.classList.add('bg-tertiary/50', 'text-secondary', 'border-primary/10');
-        });
-        button.classList.remove('bg-tertiary/50', 'text-secondary', 'border-primary/10');
-        button.classList.add('bg-primary', 'text-neutral', 'border-transparent');
-
-        // Filtrar tarjetas con animaciones suaves
-        cards.forEach((card) => {
-          const cardElement = card as HTMLElement;
-          const techsAttr = cardElement.getAttribute('data-techs');
-          if (!techsAttr) return;
-
-          const techs = techsAttr.split(',');
-          if (filter === 'all' || techs.includes(filter || '')) {
-            cardElement.style.display = 'block';
-            setTimeout(() => {
-              cardElement.style.opacity = '1';
-              cardElement.style.transform = 'scale(1)';
-            }, 10);
-          } else {
-            cardElement.style.opacity = '0';
-            cardElement.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-              cardElement.style.display = 'none';
-            }, 300);
-          }
-        });
+        applyFilter(filter);
       });
     });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        applyFilter('all');
+      });
+    }
   });
 </script>

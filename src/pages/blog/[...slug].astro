@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { Calendar, Clock, Tag } from '@lucide/astro';
+import { Calendar, Clock, ArrowLeft } from '@lucide/astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -12,35 +12,104 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, description, date, tags } = post.data;
+const { title, description, date, tags, image } = post.data;
 const { Content } = await render(post);
+
+// Cálculo dinámico de tiempo de lectura
+const words = post.body ? post.body.split(/\s+/g).length : 250;
+const readingTimeMinutes = Math.max(1, Math.ceil(words / 200));
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "datePublished": date.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": "Samuel Alejandro Alcázar"
+  },
+  "keywords": tags?.join(", ")
+};
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={`${title} | Blog — Samuel Alejandro Alcázar`}
+  description={description}
+  image={image}
+  type="article"
+  articleData={{
+    publishedTime: date.toISOString(),
+    tags: tags
+  }}
+  structuredData={structuredData}
+>
   <article class="max-w-3xl mx-auto px-4 py-12 lg:py-20">
-    <header class="mb-8">
-      <h1 class="text-3xl font-bold">{title}</h1>
+    
+    <!-- Botón Volver -->
+    <div class="mb-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 text-xs font-mono text-secondary hover:text-primary transition-colors group"
+      >
+        <ArrowLeft size={14} class="group-hover:-translate-x-1 transition-transform" />
+        <span>Volver a todos los artículos</span>
+      </a>
+    </div>
 
-      <div class="flex flex-wrap items-center gap-4 text-sm text-secondary mt-4">
+    <!-- Encabezado del Artículo -->
+    <header class="mb-10 pb-8 border-b border-primary/10">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary leading-tight">
+        {title}
+      </h1>
+
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-secondary mt-6">
         <span class="flex items-center gap-1.5">
-          <Calendar size={16} />
-          {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+          <Calendar size={14} class="text-accent" />
+          <time datetime={date.toISOString()}>
+            {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
         </span>
+        <span class="text-primary/20">|</span>
         <span class="flex items-center gap-1.5">
-          <Clock size={16} />
-          5 min de lectura
+          <Clock size={14} class="text-accent" />
+          {readingTimeMinutes} min de lectura
         </span>
-        {tags && tags.length > 0 && (
-          <span class="flex items-center gap-1.5">
-            <Tag size={16} />
-            {tags.join(', ')}
-          </span>
-        )}
       </div>
+
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mt-4">
+          {tags.map((tag) => (
+            <span class="px-2.5 py-0.5 bg-tertiary/60 border border-primary/5 rounded-md text-xs font-mono text-secondary">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
     </header>
 
-    <div class="prose prose-invert max-w-none">
+    <!-- Contenido del Artículo -->
+    <div class="prose prose-invert prose-neutral max-w-none text-secondary prose-headings:text-primary prose-a:text-accent prose-code:text-accent-2 prose-pre:bg-tertiary/60 prose-pre:border prose-pre:border-primary/10">
       <Content />
     </div>
+
+    <!-- Pie del Artículo -->
+    <footer class="mt-16 pt-8 border-t border-primary/10 flex flex-wrap items-center justify-between gap-4">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-xs text-secondary hover:text-primary transition-colors"
+      >
+        <ArrowLeft size={13} />
+        <span>Explorar más publicaciones</span>
+      </a>
+
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-tertiary text-primary border border-primary/15 rounded-xl text-xs font-medium hover:bg-tertiary/80 transition-colors"
+      >
+        <span>¿Deseas comentar o consultar algo? Escríbeme</span>
+      </a>
+    </footer>
+
   </article>
 </Layout>

@@ -8,35 +8,61 @@ export interface Props {
 
 const { post } = Astro.props;
 const { title, description, date, tags } = post.data;
+
+// Estimación dinámica del tiempo de lectura si hay cuerpo
+const words = post.body ? post.body.split(/\s+/g).length : 250;
+const readingTimeMinutes = Math.max(1, Math.ceil(words / 200));
 ---
 
-<a
-  href={`/blog/${post.id}`}
-  class="block bg-tertiary/50 backdrop-blur rounded-xl p-6 border border-primary/10 hover:border-accent/50 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(37,88,136,0.15)] transition-all duration-300 group"
->
-  <div class="flex items-center gap-4 text-xs text-secondary mb-3">
-    <span class="flex items-center gap-1">
-      <Calendar size={14} />
-      {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+<article class="bg-tertiary/40 backdrop-blur-md rounded-2xl p-6 border border-primary/10 hover:border-accent/40 hover:shadow-[0_4px_30px_rgba(37,88,136,0.15)] transition-all duration-300 flex flex-col h-full group">
+  
+  <!-- Metadatos: Fecha & Tiempo de Lectura -->
+  <div class="flex items-center gap-3 text-xs text-secondary mb-3 font-mono">
+    <span class="flex items-center gap-1.5">
+      <Calendar size={13} class="text-accent" />
+      <time datetime={date.toISOString()}>
+        {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })}
+      </time>
     </span>
-    <span class="flex items-center gap-1">
-      <Clock size={14} />
-      5 min
+    <span class="text-primary/20">|</span>
+    <span class="flex items-center gap-1.5">
+      <Clock size={13} class="text-accent" />
+      {readingTimeMinutes} min de lectura
     </span>
   </div>
 
-  <h3 class="font-semibold text-lg group-hover:text-accent transition-colors">{title}</h3>
-  <p class="text-sm text-secondary mt-2">{description}</p>
+  <!-- Título del Artículo -->
+  <h3 class="font-bold text-xl text-primary group-hover:text-accent transition-colors leading-snug">
+    <a href={`/blog/${post.id}`} class="hover:underline focus:outline-none">
+      {title}
+    </a>
+  </h3>
 
+  <!-- Descripción -->
+  <p class="text-sm text-secondary mt-2.5 leading-relaxed flex-1">
+    {description}
+  </p>
+
+  <!-- Tags -->
   {tags && tags.length > 0 && (
-    <div class="flex flex-wrap gap-1.5 mt-4">
+    <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-primary/5">
       {tags.map((tag) => (
-        <span class="px-2 py-0.5 bg-tertiary/50 rounded-lg text-xs">{tag}</span>
+        <span class="px-2 py-0.5 bg-tertiary/60 border border-primary/5 rounded-md text-[11px] font-mono text-secondary">
+          #{tag}
+        </span>
       ))}
     </div>
   )}
 
-  <span class="inline-flex items-center gap-1 text-sm text-accent mt-4 group-hover:gap-2 transition-all">
-    Leer más <ArrowRight size={14} />
-  </span>
-</a>
+  <!-- CTA Leer más -->
+  <div class="mt-4 pt-3 border-t border-primary/10">
+    <a
+      href={`/blog/${post.id}`}
+      class="inline-flex items-center gap-1.5 text-xs font-medium text-accent group-hover:text-white group-hover:gap-2 transition-all"
+    >
+      <span>Leer artículo completo</span>
+      <ArrowRight size={13} />
+    </a>
+  </div>
+
+</article>

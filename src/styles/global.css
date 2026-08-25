@@ -9,15 +9,15 @@
   --color-accent: #255888;
   --color-accent-2: #7c3aed;
 
-  /* Nuevas Animaciones */
-  --animate-fade-in-up: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* Animaciones */
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-border-glow: border-glow 8s ease-in-out infinite;
-  --animate-hero-card: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards, border-glow 8s ease-in-out infinite;
+  --animate-hero-card: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, border-glow 8s ease-in-out infinite;
 
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(16px);
     }
     to {
       opacity: 1;
@@ -27,16 +27,16 @@
 
   @keyframes border-glow {
     0%, 100% {
-      border-color: rgba(37, 88, 136, 0.15); /* color-accent con opacidad */
+      border-color: rgba(37, 88, 136, 0.15);
       box-shadow: 0 0 15px rgba(37, 88, 136, 0.03);
     }
     50% {
-      border-color: rgba(124, 58, 237, 0.3); /* color-accent-2 con opacidad */
+      border-color: rgba(124, 58, 237, 0.3);
       box-shadow: 0 0 25px rgba(124, 58, 237, 0.08);
     }
   }
 
-  --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee: marquee 25s linear infinite;
 
   @keyframes marquee {
     from {
@@ -45,5 +45,35 @@
     to {
       transform: translateX(-50%);
     }
+  }
+}
+
+/* Soporte para usuarios con preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Estilos de impresión para el CV */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  nav, footer, .no-print {
+    display: none !important;
+  }
+  .print-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 }
